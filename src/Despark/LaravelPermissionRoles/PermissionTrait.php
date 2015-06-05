@@ -60,7 +60,7 @@ trait PermissionTrait
     {
         foreach ($this->roles as $role) {
             foreach ($role->permissions as $permission) {
-                if ($permission->name == $name || $permission->slug == $name || $permission->id == $name) {
+                if ($permission->name == $name || $permission->slug == $name) {
                     return true;
                 }
             }

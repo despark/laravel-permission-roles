@@ -1,5 +1,8 @@
 {
     "name": "despark/laravel-permission-roles",
+    "description": "Permission roles package for laravel framework",
+    "keywords": ["framework", "laravel", "despark", "permissions", "roles"],
+    "license": "MIT",
     "description": "",
     "authors": [
         {
