@@ -2,6 +2,8 @@
 
 namespace Despark\LaravelPermissionRoles;
 
+use Despark\LaravelPermissionRoles\Models\Role;
+
 trait PermissionTrait
 {
     public function __call($method, $params = [])
@@ -22,16 +24,11 @@ trait PermissionTrait
         return $this->belongsToMany(__NAMESPACE__.'\\Roles')->withTimestamps();
     }
 
-    public function detachRoles()
-    {
-        $this->detachRole($this->roles->lists('id'));
-    }
-
     public function attachRole($name)
     {
         $ids = is_array($name) ? $name : func_get_args();
         foreach ($ids as $search) {
-            $role = \Role::search($name)->firstOrFail();
+            $role = Role::search($name)->firstOrFail();
             $this->roles()->attach($role->id);
         }
     }
@@ -40,9 +37,14 @@ trait PermissionTrait
     {
         $roles = is_array($name) ? $name : func_get_args();
         foreach ($roles as $role) {
-            $role = \Role::search($role)->firstOrFail();
+            $role = Role::search($role)->firstOrFail();
             $this->roles()->detach($role->id);
         }
+    }
+
+    public function detachRoles()
+    {
+        $this->detachRole($this->roles->lists('id'));
     }
 
     public function is($name)
