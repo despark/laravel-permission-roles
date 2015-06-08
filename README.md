@@ -44,9 +44,10 @@ class User extends Eloquent
 
 ```php
 
+$input = Input::all();
 $user = new User();
 $user = $user->create($input);
-$user->attachRole(Input::get('role'));
+$user->attachRole(array_get($input, 'role'));
 
 ```
 
