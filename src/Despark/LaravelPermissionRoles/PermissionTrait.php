@@ -2,7 +2,7 @@
 
 namespace Despark\LaravelPermissionRoles;
 
-use Despark\LaravelPermissionRoles\Models\Role;
+use Despark\LaravelPermissionRoles\Role as RoleModel;
 
 trait PermissionTrait
 {
@@ -21,14 +21,25 @@ trait PermissionTrait
 
     public function roles()
     {
-        return $this->belongsToMany(__NAMESPACE__.'\\Roles')->withTimestamps();
+        return $this->belongsToMany(__NAMESPACE__.'\\Role')->withTimestamps();
+    }
+
+    public function getRole()
+    {
+        return $this->roles->first();
+    }
+
+    public function changeRole($id)
+    {
+        $this->roles()->detach($id);
+        $this->attachRole($id);
     }
 
     public function attachRole($name)
     {
         $ids = is_array($name) ? $name : func_get_args();
         foreach ($ids as $search) {
-            $role = Role::search($name)->firstOrFail();
+            $role = RoleModel::find($name)->firstOrFail();
             $this->roles()->attach($role->id);
         }
     }
@@ -37,7 +48,7 @@ trait PermissionTrait
     {
         $roles = is_array($name) ? $name : func_get_args();
         foreach ($roles as $role) {
-            $role = Role::search($role)->firstOrFail();
+            $role = RoleModel::find($role)->firstOrFail();
             $this->roles()->detach($role->id);
         }
     }
