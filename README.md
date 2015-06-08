@@ -38,6 +38,9 @@ class User extends Eloquent
     use PermissionTrait;
 }
 
+```
+
+
 ## Attach Role to User
 
 ```php
@@ -85,6 +88,55 @@ if ($role->permissions->count()) {
 }
 
 ```
+
+## Check if current user has permission
+
+```php
+
+Auth::user()->canLoginToAdmin()  // permission slug 'login_to_admin'
+
+Auth::user()->canAddUsers()  // permission slug 'edit_user'
+
+```
+
+## Permission based routes
+
+filters.php
+
+```php
+
+Route::filter('admin.permission', function () {
+
+    $route = explode('/', \Route::getCurrentRoute()->getPath());
+
+    if (!Auth::user()->can('edit_'.str_replace('-', '_', array_get($route, 1)))) {
+        throw new \Exception("Sorry, you don't have permission to access this page.");
+    }
+});
+
+```
+routes.php
+
+```php
+
+Route::group(
+    ['before' => 'admin.permission'], function () {
+        Route::resource('user', 'UserController');
+    }
+);
+
+Route::group(
+    ['before' => 'admin.permission'], function () {
+        Route::resource('page', 'PageController');
+
+    }
+);
+
+```
+
+
+
+
 
 
 
