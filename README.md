@@ -23,6 +23,7 @@ Once it's installed, you need to register the service provider in `app/config/ap
 
 Migrate required tables:
 `php artisan migrate --package="despark/laravel-permission-roles"`
+command will create: roles, role_user, permissions, permission_role - tables
 
 
 # How to use it
@@ -47,8 +48,6 @@ class User extends Eloquent
 
 $user = new User();
 $user = $user->create($input);
-$user->attachRole(Input::get('role'));
-$user = User::findOrFail($id)
 $user->attachRole(Input::get('role'));
 
 ```
@@ -96,6 +95,8 @@ if ($role->permissions->count()) {
 Auth::user()->canLoginToAdmin()  // permission slug 'login_to_admin'
 
 Auth::user()->canAddUsers()  // permission slug 'edit_user'
+
+Auth::user()->canEditUsers()  // permission slug 'edit_page'
 
 ```
 
