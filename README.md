@@ -25,7 +25,6 @@ Migrate required tables:
 `php artisan migrate --package="despark/laravel-permission-roles"`
 command will create: roles, role_user, permissions, permission_role - tables
 
-
 # How to use it
 
 ## User Model Example
@@ -40,7 +39,8 @@ class User extends Eloquent
 }
 
 ```
-
+Roles table
+![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034023/979fe46c-0dec-11e5-8173-6e254395520a.png)
 
 ## Attach Role to User
 
@@ -74,6 +74,8 @@ class RoleController extends BaseController
 
 ```
 
+Permissions table
+![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034024/997ece6a-0dec-11e5-9878-c1478f07f527.png)
 ## Add permissions to Role
 
 ```php
