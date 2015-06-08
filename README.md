@@ -25,9 +25,9 @@ Migrate required tables:
 `php artisan migrate --package="despark/laravel-permission-roles"`
 command will create: roles, role_user, permissions, permission_role - tables
 
-# How to use it
+## How to use it
 
-## User Model Example
+- User Model Example
 
 ```php
 
@@ -39,10 +39,8 @@ class User extends Eloquent
 }
 
 ```
-Roles table
-![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034023/979fe46c-0dec-11e5-8173-6e254395520a.png)
 
-## Attach Role to User
+- Attach Role to User
 
 ```php
 
@@ -52,7 +50,7 @@ $user->attachRole(Input::get('role'));
 
 ```
 
-## Update user Role
+- Update user Role
 
 ```php
 
@@ -61,7 +59,7 @@ $user->changeRole(Input::get('role'));
 
 ```
 
-## Use Role Model
+- Use Role Model
 
 ```php
 
@@ -73,10 +71,11 @@ class RoleController extends BaseController
 }
 
 ```
+Roles table
+![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034023/979fe46c-0dec-11e5-8173-6e254395520a.png)
 
-Permissions table
-![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034024/997ece6a-0dec-11e5-9878-c1478f07f527.png)
-## Add permissions to Role
+
+- Add permissions to Role
 
 ```php
 
@@ -90,7 +89,7 @@ if ($role->permissions->count()) {
 
 ```
 
-## Check if current user has permission
+- Check if current user has permission
 
 ```php
 
@@ -101,6 +100,8 @@ Auth::user()->canAddUsers()  // permission slug 'edit_user'
 Auth::user()->canEditUsers()  // permission slug 'edit_page'
 
 ```
+Permissions table
+![alt tag](https://cloud.githubusercontent.com/assets/11192578/8034024/997ece6a-0dec-11e5-9878-c1478f07f527.png)
 
 ## Permission based routes
 
