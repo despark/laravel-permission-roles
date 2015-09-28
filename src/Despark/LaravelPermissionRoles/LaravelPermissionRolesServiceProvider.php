@@ -7,35 +7,22 @@ use Illuminate\Support\ServiceProvider;
 class LaravelPermissionRolesServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Bootstrap the application events.
-     */
-    public function boot()
-    {
-        $this->package('despark/laravel-permission-roles');
-    }
-
-    /**
      * Register the service provider.
      */
     public function register()
     {
-        //
+        $this->app->bind('laravel-permission-roles', function ($app) {
+            return new LaravelPermissionRoles();
+        });
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
+     * Boot the package.
      */
-    public function provides()
+    public function boot()
     {
-        return array();
+        $this->publishes([
+            __DIR__.'/src/migrations/' => base_path('/database/migrations'),
+        ]);
     }
 }
