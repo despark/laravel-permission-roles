@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+    ];
 
     public $tableColumns = [
         'name'        => 'Name',
@@ -22,5 +26,17 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany(__NAMESPACE__.'\\User')->withTimestamps();
+    }
+
+    public function rules()
+    {
+        $rules = [
+            'name' => 'required',
+            'slug' => 'required',
+            'name' => 'required',
+            'permissions' => 'required',
+        ];
+
+        return $rules;
     }
 }
