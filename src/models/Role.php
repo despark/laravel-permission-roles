@@ -39,4 +39,9 @@ class Role extends Model
 
         return $rules;
     }
+
+    public static function getList()
+    {
+        return static::lists('name', 'id');
+    }
 }
