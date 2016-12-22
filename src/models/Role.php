@@ -2,16 +2,16 @@
 
 namespace Despark\LaravelPermissionRoles;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends Eloquent
+class Role extends Model
 {
     protected $fillable = ['name', 'slug', 'description'];
 
     public $tableColumns = [
-        'name'        => 'Name',
+        'name' => 'Name',
         'description' => 'Description',
-        'slug'        => 'Slug',
+        'slug' => 'Slug',
     ];
 
     public function permissions()
@@ -22,5 +22,22 @@ class Role extends Eloquent
     public function users()
     {
         return $this->belongsToMany(__NAMESPACE__.'\\User')->withTimestamps();
+    }
+
+    public function rules()
+    {
+        $rules = [
+            'name' => 'required',
+            'slug' => 'required',
+            'name' => 'required',
+            'permissions' => 'required',
+        ];
+
+        return $rules;
+    }
+
+    public static function getList()
+    {
+        return static::lists('name', 'id');
     }
 }

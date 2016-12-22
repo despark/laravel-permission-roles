@@ -2,16 +2,16 @@
 
 namespace Despark\LaravelPermissionRoles;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Eloquent
+class Permission extends Model
 {
     protected $fillable = ['name', 'slug', 'description'];
 
     public $tableColumns = [
-        'name'        => 'Name',
+        'name' => 'Name',
         'description' => 'Description',
-        'slug'        => 'Slug',
+        'slug' => 'Slug',
     ];
 
     public function roles()

@@ -26,7 +26,6 @@ class LaravelPermissionRolesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
